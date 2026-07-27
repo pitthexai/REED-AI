@@ -142,12 +142,6 @@ function buildMastheadDetails() {
     .map((word, index) => `<span class="title-word" aria-hidden="true" style="--word-index:${index}">${word}</span>`)
     .join(" ");
 
-  const index = document.createElement("span");
-  index.className = "page-index";
-  index.setAttribute("aria-hidden", "true");
-  index.textContent = `0${currentPageIndex + 1}`;
-  panel.prepend(index);
-
 }
 
 const topics = [

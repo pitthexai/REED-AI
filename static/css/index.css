@@ -451,14 +451,6 @@ body[data-page="home"] #site-sidebar { display: none; }
   border-radius: 34px;
   background: rgba(255,255,255,.36);
 }
-.page-index {
-  position: absolute;
-  top: 2px;
-  left: -72px;
-  color: var(--blue);
-  font-family: var(--font-display);
-  font-size: 20px;
-}
 .eyebrow {
   display: flex;
   align-items: center;
@@ -1277,7 +1269,6 @@ body[data-page="home"] #about .section-lead { grid-column: 2; max-width: 62ch; }
   .site-main { margin-left: 0; padding-top: 0; }
   body[data-page="home"] .site-main { padding-top: var(--header-h); }
   .site-footer, .page-next { margin-left: 0; }
-  .page-index { display: none; }
   .page-masthead { min-height: 500px; }
   .home-hero { min-height: calc(100svh - var(--header-h)); }
   .home-focus, .editorial-grid, .feature-split { grid-template-columns: 1fr; }
@@ -1500,12 +1491,6 @@ h1, h2, h3, h4 {
   width: min(980px, calc(100% - 16px));
   padding: clamp(38px, 5vw, 62px);
   background: rgba(255,255,255,.18);
-}
-
-.page-index {
-  top: -24px;
-  left: 0;
-  font-size: 17px;
 }
 
 .page-masthead h1 {
