@@ -974,6 +974,34 @@ body[data-page="home"] #about .section-lead { grid-column: 2; max-width: 62ch; }
 .timeline-item h3 { margin-bottom: 7px; font-size: 29px; }
 .timeline-item p { color: var(--muted); font-size: 13px; }
 
+/* Extended submission deadlines */
+.deadline-change {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  color: var(--navy);
+  line-height: 1.4;
+}
+.deadline-change del {
+  color: #53677e;
+  font-size: .88em;
+  text-decoration-thickness: 1.5px;
+}
+.deadline-change strong { font-weight: 700; }
+.deadline-time {
+  display: block;
+  margin-top: 6px;
+  color: var(--navy);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.timeline-date { min-width: 0; }
+.timeline-date .deadline-change del { font-size: 19px; }
+.date-table td:has(.deadline-change) { min-width: 320px; }
+
 /* People */
 .people-grid {
   display: grid;

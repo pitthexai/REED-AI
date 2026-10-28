@@ -36,7 +36,8 @@ const pageSections = {
   committee: [
     ["Organizing Committee", "organizing-committee.html#organizing-committee"],
     ["Program Committee", "organizing-committee.html#program-committee"],
-    ["Webmaster", "organizing-committee.html#webmaster"]
+    ["Webmaster", "organizing-committee.html#webmaster"],
+    ["Program Coordinators", "organizing-committee.html#program-coordinators"]
   ]
 };
 
@@ -169,8 +170,8 @@ const topics = [
 ];
 
 const dates = [
-  ["October 24, 2026", "Abstract Registration", "REED-AI abstract registration deadline."],
-  ["October 31, 2026", "Paper Submission Deadline", "Deadline for REED-AI paper submissions."],
+  ["November 8, 2026", "Abstract Registration", "Extended deadline for REED-AI abstract registration.", "October 24, 2026", "2026-11-08T23:59:00-08:00"],
+  ["November 15, 2026", "Paper Submission Deadline", "Extended deadline for REED-AI paper submissions.", "October 31, 2026", "2026-11-15T23:59:00-08:00"],
   ["December 31, 2026", "Acceptance Notification", "Authors receive the track decision."],
   ["February 28, 2027", "Camera-Ready Deadline", "Final accepted manuscripts are due."],
   ["March 7-9, 2027", "ACM TRUST 2027", "Conference in Washington, DC."]
@@ -199,6 +200,11 @@ const webmasters = [
   { name: "Lyudong Yan", affiliation: "Website Team", image: "assets/images/lyudong-yan.webp", link: "https://github.com/lyudongyan" }
 ];
 
+const programCoordinators = [
+  { name: "Mehrnaz Abedian, MS", affiliation: "University of Pittsburgh", image: "assets/images/mehrnaz-abedian.jpg", link: "https://www.linkedin.com/in/mehrnaz-abedian" },
+  { name: "Anatea Einhorn", image: "assets/images/anatea-einhorn.png", link: "https://www.linkedin.com/in/anateaeinhorn" }
+];
+
 function renderPerson(person) {
   const visual = person.image
     ? `<img src="${person.image}" alt="Portrait of ${person.name}" width="640" height="800" loading="lazy" decoding="async" fetchpriority="low">`
@@ -206,7 +212,8 @@ function renderPerson(person) {
   const name = person.link
     ? `<a href="${person.link}" target="_blank" rel="noopener">${person.name}</a>`
     : person.name;
-  return `<article class="person-card"><div class="person-photo">${visual}</div><div class="person-copy"><h3>${name}</h3><span class="affiliation">${person.affiliation}</span></div></article>`;
+  const affiliation = person.affiliation ? `<span class="affiliation">${person.affiliation}</span>` : "";
+  return `<article class="person-card"><div class="person-photo">${visual}</div><div class="person-copy"><h3>${name}</h3>${affiliation}</div></article>`;
 }
 
 function renderPeople(selector, people) {
@@ -224,17 +231,22 @@ function renderTopics(filter = "") {
   if (empty) empty.hidden = filtered.length !== 0;
 }
 
+function formatDeadline(date, previousDate, dateTime) {
+  if (!previousDate) return `<time>${date}</time>`;
+  return `<span class="deadline-change"><del>${previousDate}</del><strong><time datetime="${dateTime}">${date}</time></strong></span><span class="deadline-time">11:59 p.m. Pacific Time</span>`;
+}
+
 function renderDates() {
   const timeline = document.querySelector("#date-timeline");
   if (timeline) {
     timeline.innerHTML = dates
-      .map(([date, title, detail]) => `<article class="timeline-item"><time>${date}</time><div><h3>${title}</h3><p>${detail}</p></div></article>`)
+      .map(([date, title, detail, previousDate, dateTime]) => `<article class="timeline-item"><div class="timeline-date">${formatDeadline(date, previousDate, dateTime)}</div><div><h3>${title}</h3><p>${detail}</p></div></article>`)
       .join("");
   }
   const grid = document.querySelector("#date-grid");
   if (grid) {
     grid.innerHTML = dates
-      .map(([date, title, detail]) => `<article class="info-card"><span class="date">${date}</span><h3>${title}</h3><p>${detail}</p></article>`)
+      .map(([date, title, detail, previousDate, dateTime]) => `<article class="info-card"><span class="date">${formatDeadline(date, previousDate, dateTime)}</span><h3>${title}</h3><p>${detail}</p></article>`)
       .join("");
   }
 }
@@ -686,6 +698,7 @@ renderDates();
 renderPeople("#event-organizer-grid", eventOrganizers);
 renderPeople("#program-committee-grid", programCommittee);
 renderPeople("#webmaster-grid", webmasters);
+renderPeople("#program-coordinator-grid", programCoordinators);
 setupLiquidGlass();
 setupNeuralField();
 setupSectionTraces();
